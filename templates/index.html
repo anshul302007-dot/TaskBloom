@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskBloom | Smart Task Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <a class="brand" href="/">
+                <span class="brand-icon">✿</span>
+                <span>TaskBloom</span>
+            </a>
+
+            <p class="side-label">WORKSPACE</p>
+            <button class="nav-item active" type="button" data-filter="all">
+                <span>▦</span> All Tasks
+                <span class="nav-count" id="sideTotal">0</span>
+            </button>
+            <button class="nav-item" type="button" data-filter="pending">
+                <span>◷</span> Pending
+            </button>
+            <button class="nav-item" type="button" data-filter="completed">
+                <span>✓</span> Completed
+            </button>
+
+            <div class="sidebar-bottom">
+                <div class="mini-flower">🌷</div>
+                <strong>Small steps, big results.</strong>
+                <p>Every task you finish is progress.</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div>
+                    <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+                    <h1>Make today count<span class="title-dot">.</span></h1>
+                    <p class="subtitle">A little progress every day adds up.</p>
+                </div>
+                <div class="date-pill" id="todayDate">✦ Your day, your way</div>
+            </header>
+
+            <section class="welcome-banner">
+                <div class="welcome-copy">
+                    <span class="banner-tag">YOUR DAILY SPACE ✨</span>
+                    <h2>Plan it. Do it. Bloom.</h2>
+                    <p>Focus on what matters. One task at a time.</p>
+                </div>
+                <div class="banner-art" aria-hidden="true">🌸</div>
+            </section>
+
+            <section class="stats-grid">
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Total tasks</span>
+                        <span class="stat-icon purple">▤</span>
+                    </div>
+                    <strong id="totalTasks">0</strong>
+                    <p>Everything on your list</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Completed</span>
+                        <span class="stat-icon green">✓</span>
+                    </div>
+                    <strong id="completedTasks">0</strong>
+                    <p>Look how far you've come</p>
+                </article>
+
+                <article class="stat-card">
+                    <div class="stat-top">
+                        <span>Still to do</span>
+                        <span class="stat-icon orange">◷</span>
+                    </div>
+                    <strong id="pendingTasks">0</strong>
+                    <p>Your next little wins</p>
+                </article>
+            </section>
+
+            <section class="progress-panel">
+                <div class="progress-info">
+                    <div>
+                        <h3>Daily progress</h3>
+                        <p>Every completed task counts.</p>
+                    </div>
+                    <strong id="progressPercent">0%</strong>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </section>
+
+            <section class="add-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">LET'S GET THINGS DONE</p>
+                        <h2>Create a new task</h2>
+                    </div>
+                    <span class="heading-flower">✿</span>
+                </div>
+
+                <form id="taskForm">
+                    <div class="form-field task-title-field">
+                        <label for="taskInput">Task name</label>
+                        <input id="taskInput" type="text"
+                               placeholder="What would you like to accomplish?"
+                               maxlength="200" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="priority">Priority</label>
+                        <select id="priority">
+                            <option value="Low">🌱 Low</option>
+                            <option value="Medium" selected>🌼 Medium</option>
+                            <option value="High">🔥 High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="taskDate">Due date</label>
+                        <input id="taskDate" type="date">
+                    </div>
+
+                    <button class="primary-btn" type="submit">＋ Add task</button>
+                </form>
+            </section>
+
+            <section class="tasks-panel">
+                <div class="section-heading tasks-heading">
+                    <div>
+                        <p class="eyebrow">YOUR TO-DO LIST</p>
+                        <h2>Tasks & priorities</h2>
+                    </div>
+                    <span class="task-total" id="visibleCount">0 tasks</span>
+                </div>
+
+                <div class="task-tools">
+                    <label class="search-box" for="searchTasks">
+                        <span>⌕</span>
+                        <input id="searchTasks" type="search"
+                               placeholder="Search your tasks..."
+                               aria-label="Search tasks">
+                    </label>
+                    <select id="filterTasks" aria-label="Filter tasks">
+                        <option value="all">All tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+
+                <div id="taskList" class="task-list"></div>
+
+                <div class="empty-state" id="emptyState" hidden>
+                    <div class="empty-illustration">🌷</div>
+                    <h3 id="emptyTitle">Your space is ready to bloom!</h3>
+                    <p id="emptyMessage">Add your first task and start making progress.</p>
+                </div>
+            </section>
+
+            <footer class="app-footer">
+                Made with <span>♥</span> and a little bit of focus.
+            </footer>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
